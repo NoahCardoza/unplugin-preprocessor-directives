@@ -16,54 +16,15 @@ content: "!DEV";}
 
 body {
 }
-
-//# sourceMappingURL=if.css.map",
+",
   "map": SourceMap {
-    "file": "if.css",
+    "file": undefined,
     "mappings": "AAAA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAIP,CAAC,CAAC;AACF,CAAC;AACD,CAAC;AACD,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACP,gBAKA,CAAC,CAAC;AACF,CAAC;AACD,CAAC;AACD,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACP,gBAOA,CAAC,CAAC;AACF,CAAC;AACD,CAAC;AACD,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAQP,CAAC,CAAC;",
     "names": [],
     "sources": [
-      "if.css",
+      "",
     ],
-    "sourcesContent": [
-      "body {
-  /* #if DEV */
-  content: "DEV";
-  /* #endif */
-}
-
-
-body {
-  /* #if !DEV */
-  content: "!DEV";
-  /* #else */
-  content: "!DEV else";
-  /* #endif */
-}
-
-
-body {
-  /* #if !DEV */
-  content: "!DEV";
-  /* #elif TEST */
-  content: "TEST";
-  /* #else */
-  content: "!DEV else";
-  /* #endif */
-}
-
-
-body {
-  /* #if DEV */
-    /* #if !TEST */
-    content: "!DEV !TEST";
-    /* #else */
-    content: "else";
-    /* #endif */
-  /* #endif */
-}
-",
-    ],
+    "sourcesContent": undefined,
     "version": 3,
   },
 }
@@ -85,54 +46,15 @@ content: "TEST";}
 
 body {
 content: "else";}
-
-//# sourceMappingURL=if.css.map",
+",
   "map": SourceMap {
-    "file": "if.css",
+    "file": undefined,
     "mappings": "AAAA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACP,eAGA,CAAC,CAAC;AACF,CAAC;AACD,CAAC;AACD,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACP,qBAKA,CAAC,CAAC;AACF,CAAC;AACD,CAAC;AACD,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACP,gBAOA,CAAC,CAAC;AACF,CAAC;AACD,CAAC;AACD,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACP,gBAOA,CAAC,CAAC;",
     "names": [],
     "sources": [
-      "if.css",
+      "",
     ],
-    "sourcesContent": [
-      "body {
-  /* #if DEV */
-  content: "DEV";
-  /* #endif */
-}
-
-
-body {
-  /* #if !DEV */
-  content: "!DEV";
-  /* #else */
-  content: "!DEV else";
-  /* #endif */
-}
-
-
-body {
-  /* #if !DEV */
-  content: "!DEV";
-  /* #elif TEST */
-  content: "TEST";
-  /* #else */
-  content: "!DEV else";
-  /* #endif */
-}
-
-
-body {
-  /* #if DEV */
-    /* #if !TEST */
-    content: "!DEV !TEST";
-    /* #else */
-    content: "else";
-    /* #endif */
-  /* #endif */
-}
-",
-    ],
+    "sourcesContent": undefined,
     "version": 3,
   },
 }
@@ -143,45 +65,15 @@ exports[`sourcemap > should generate sourcemap if.html, dev = false 1`] = `
   "code": "
 <div>!DEV</div>
 <div>!DEV</div>
-
-//# sourceMappingURL=if.html.map",
+",
   "map": SourceMap {
-    "file": "if.html",
+    "file": undefined,
     "mappings": "AAGA,CAAC;AACD,eAKA,CAAC;AACD,eAOA,CAAC;",
     "names": [],
     "sources": [
-      "if.html",
+      "",
     ],
-    "sourcesContent": [
-      "<!-- #if DEV -->
-<div>DEV</div>
-<!-- #endif -->
-
-<!-- #if !DEV -->
-<div>!DEV</div>
-<!-- #else -->
-<div>!DEV else</div>
-<!-- #endif -->
-
-<!-- #if !DEV -->
-<div>!DEV</div>
-<!-- #elif TEST -->
-<div>TEST</div>
-<!-- #else -->
-<div>!DEV else</div>
-<!-- #endif -->
-
-<!-- #if DEV -->
-<div>
-  <!-- #if !TEST -->
-  <div>!DEV !TEST</div>
-  <!-- #else -->
-  <div>else</div>
-  <!-- #endif -->
-</div>
-<!-- #endif -->
-",
-    ],
+    "sourcesContent": undefined,
     "version": 3,
   },
 }
@@ -194,45 +86,15 @@ exports[`sourcemap > should generate sourcemap if.html, dev = true 1`] = `
 <div>TEST</div>
 <div>
 <div>else</div>
-</div>
-//# sourceMappingURL=if.html.map",
+</div>",
   "map": SourceMap {
-    "file": "if.html",
+    "file": undefined,
     "mappings": "AAAA,cAGA,CAAC;AACD,oBAKA,CAAC;AACD,eAOA,CAAC;AACD;AAAA;AAAA",
     "names": [],
     "sources": [
-      "if.html",
+      "",
     ],
-    "sourcesContent": [
-      "<!-- #if DEV -->
-<div>DEV</div>
-<!-- #endif -->
-
-<!-- #if !DEV -->
-<div>!DEV</div>
-<!-- #else -->
-<div>!DEV else</div>
-<!-- #endif -->
-
-<!-- #if !DEV -->
-<div>!DEV</div>
-<!-- #elif TEST -->
-<div>TEST</div>
-<!-- #else -->
-<div>!DEV else</div>
-<!-- #endif -->
-
-<!-- #if DEV -->
-<div>
-  <!-- #if !TEST -->
-  <div>!DEV !TEST</div>
-  <!-- #else -->
-  <div>else</div>
-  <!-- #endif -->
-</div>
-<!-- #endif -->
-",
-    ],
+    "sourcesContent": undefined,
     "version": 3,
   },
 }
@@ -243,43 +105,15 @@ exports[`sourcemap > should generate sourcemap if.js, dev = false 1`] = `
   "code": "
 console.log('!DEV')
 console.log('!DEV')
-
-//# sourceMappingURL=if.js.map",
+",
   "map": SourceMap {
-    "file": "if.js",
+    "file": undefined,
     "mappings": "AAGA,CAAC;AACD,mBAKA,CAAC;AACD,mBAOA,CAAC;",
     "names": [],
     "sources": [
-      "if.js",
+      "",
     ],
-    "sourcesContent": [
-      "// #if DEV
-console.log('DEV')
-// #endif
-
-// #if !DEV
-console.log('!DEV')
-// #else
-console.log('!DEV else')
-// #endif
-
-// #if !DEV
-console.log('!DEV')
-// #elif TEST
-console.log('TEST')
-// #else
-console.log('!DEV else')
-// #endif
-
-// #if DEV
-// #if !TEST
-console.log('!DEV !TEST')
-// #else
-console.log('else')
-// #endif
-// #endif
-",
-    ],
+    "sourcesContent": undefined,
     "version": 3,
   },
 }
@@ -290,43 +124,15 @@ exports[`sourcemap > should generate sourcemap if.js, dev = true 1`] = `
   "code": "console.log('DEV')
 console.log('!DEV else')
 console.log('TEST')
-console.log('else')
-//# sourceMappingURL=if.js.map",
+console.log('else')",
   "map": SourceMap {
-    "file": "if.js",
+    "file": undefined,
     "mappings": "AAAA,kBAGA,CAAC;AACD,wBAKA,CAAC;AACD,mBAOA,CAAC;AACD",
     "names": [],
     "sources": [
-      "if.js",
+      "",
     ],
-    "sourcesContent": [
-      "// #if DEV
-console.log('DEV')
-// #endif
-
-// #if !DEV
-console.log('!DEV')
-// #else
-console.log('!DEV else')
-// #endif
-
-// #if !DEV
-console.log('!DEV')
-// #elif TEST
-console.log('TEST')
-// #else
-console.log('!DEV else')
-// #endif
-
-// #if DEV
-// #if !TEST
-console.log('!DEV !TEST')
-// #else
-console.log('else')
-// #endif
-// #endif
-",
-    ],
+    "sourcesContent": undefined,
     "version": 3,
   },
 }
@@ -336,29 +142,15 @@ exports[`sourcemap > should generate sourcemap if.jsx, dev = false 1`] = `
 {
   "code": "const Component = () => <div>
 </div>;
-
-//# sourceMappingURL=if.jsx.map",
+",
   "map": SourceMap {
-    "file": "if.jsx",
+    "file": undefined,
     "mappings": "AAAA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAU9B,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;",
     "names": [],
     "sources": [
-      "if.jsx",
+      "",
     ],
-    "sourcesContent": [
-      "const Component = () => <div>
-    {/* #if DEV */}
-    DEV
-    {/* #endif */}
-    {/* #if DEV=true */}
-    DEV=true
-    {/* #endif */}
-    {/* #if !PROD!=true */}
-    !PROD!=true
-    {/* #endif */}
-</div>;
-",
-    ],
+    "sourcesContent": undefined,
     "version": 3,
   },
 }
@@ -368,29 +160,15 @@ exports[`sourcemap > should generate sourcemap if.jsx, dev = true 1`] = `
 {
   "code": "const Component = () => <div>
 DEVDEV=true</div>;
-
-//# sourceMappingURL=if.jsx.map",
+",
   "map": SourceMap {
-    "file": "if.jsx",
+    "file": undefined,
     "mappings": "AAAA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAC9B,GAGA,QAMA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;",
     "names": [],
     "sources": [
-      "if.jsx",
+      "",
     ],
-    "sourcesContent": [
-      "const Component = () => <div>
-    {/* #if DEV */}
-    DEV
-    {/* #endif */}
-    {/* #if DEV=true */}
-    DEV=true
-    {/* #endif */}
-    {/* #if !PROD!=true */}
-    !PROD!=true
-    {/* #endif */}
-</div>;
-",
-    ],
+    "sourcesContent": undefined,
     "version": 3,
   },
 }
