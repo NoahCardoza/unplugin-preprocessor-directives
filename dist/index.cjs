@@ -18,7 +18,7 @@
 
 
 
-var _chunk4HBUH5BOcjs = require('./chunk-4HBUH5BO.cjs');
+var _chunkBAM7OE6Jcjs = require('./chunk-BAM7OE6J.cjs');
 
 
 
@@ -38,5 +38,5 @@ var _chunk4HBUH5BOcjs = require('./chunk-4HBUH5BO.cjs');
 
 
 
-exports.Context = _chunk4HBUH5BOcjs.Context; exports.Lexer = _chunk4HBUH5BOcjs.Lexer; exports.MessageDirective = _chunk4HBUH5BOcjs.MessageDirective; exports.Parser = _chunk4HBUH5BOcjs.Parser; exports.comments = _chunk4HBUH5BOcjs.comments; exports.createProgramNode = _chunk4HBUH5BOcjs.createProgramNode; exports.defineDirective = _chunk4HBUH5BOcjs.defineDirective; exports.findComment = _chunk4HBUH5BOcjs.findComment; exports.ifDirective = _chunk4HBUH5BOcjs.ifDirective; exports.isComment = _chunk4HBUH5BOcjs.isComment; exports.parseComment = _chunk4HBUH5BOcjs.parseComment; exports.resolveConditional = _chunk4HBUH5BOcjs.resolveConditional; exports.resolveOptions = _chunk4HBUH5BOcjs.resolveOptions; exports.simpleMatchToken = _chunk4HBUH5BOcjs.simpleMatchToken; exports.sortUserDirectives = _chunk4HBUH5BOcjs.sortUserDirectives; exports.theDefineDirective = _chunk4HBUH5BOcjs.theDefineDirective; exports.unplugin = _chunk4HBUH5BOcjs.unplugin; exports.unpluginFactory = _chunk4HBUH5BOcjs.unpluginFactory;
+exports.Context = _chunkBAM7OE6Jcjs.Context; exports.Lexer = _chunkBAM7OE6Jcjs.Lexer; exports.MessageDirective = _chunkBAM7OE6Jcjs.MessageDirective; exports.Parser = _chunkBAM7OE6Jcjs.Parser; exports.comments = _chunkBAM7OE6Jcjs.comments; exports.createProgramNode = _chunkBAM7OE6Jcjs.createProgramNode; exports.defineDirective = _chunkBAM7OE6Jcjs.defineDirective; exports.findComment = _chunkBAM7OE6Jcjs.findComment; exports.ifDirective = _chunkBAM7OE6Jcjs.ifDirective; exports.isComment = _chunkBAM7OE6Jcjs.isComment; exports.parseComment = _chunkBAM7OE6Jcjs.parseComment; exports.resolveConditional = _chunkBAM7OE6Jcjs.resolveConditional; exports.resolveOptions = _chunkBAM7OE6Jcjs.resolveOptions; exports.simpleMatchToken = _chunkBAM7OE6Jcjs.simpleMatchToken; exports.sortUserDirectives = _chunkBAM7OE6Jcjs.sortUserDirectives; exports.theDefineDirective = _chunkBAM7OE6Jcjs.theDefineDirective; exports.unplugin = _chunkBAM7OE6Jcjs.unplugin; exports.unpluginFactory = _chunkBAM7OE6Jcjs.unpluginFactory;
 exports.default = module.exports;

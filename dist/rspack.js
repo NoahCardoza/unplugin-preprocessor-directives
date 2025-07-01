@@ -1,6 +1,6 @@
 import {
   unpluginFactory
-} from "./chunk-NJFSC2GB.js";
+} from "./chunk-MSPQUBMV.js";
 
 // src/rspack.ts
 import { createRspackPlugin } from "unplugin";

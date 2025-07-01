@@ -1,7 +1,7 @@
 import {
   webpack_default
-} from "./chunk-JPV456KZ.js";
-import "./chunk-NJFSC2GB.js";
+} from "./chunk-JR4UXNKL.js";
+import "./chunk-MSPQUBMV.js";
 export {
   webpack_default as default
 };

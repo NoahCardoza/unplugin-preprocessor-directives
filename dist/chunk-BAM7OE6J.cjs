@@ -1,4 +1,4 @@
-var __defProp = Object.defineProperty;
+"use strict";Object.defineProperty(exports, "__esModule", {value: true}); function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }var __defProp = Object.defineProperty;
 var __defProps = Object.defineProperties;
 var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
@@ -167,9 +167,9 @@ var Parser = class _Parser {
 };
 
 // src/core/context/index.ts
-import process from "process";
-import { createFilter, createLogger, loadEnv } from "vite";
-import MagicString from "magic-string";
+var _process = require('process'); var _process2 = _interopRequireDefault(_process);
+var _vite = require('vite');
+var _magicstring = require('magic-string'); var _magicstring2 = _interopRequireDefault(_magicstring);
 
 // src/core/context/generator.ts
 var Generator = class {
@@ -279,7 +279,7 @@ var Transformer = class _Transformer {
 // src/core/context/index.ts
 function resolveOptions(options) {
   return __spreadValues({
-    cwd: process.cwd(),
+    cwd: _process2.default.cwd(),
     include: ["**/*"],
     exclude: [/[\\/]node_modules[\\/]/, /[\\/]\.git[\\/]/],
     directives: []
@@ -303,21 +303,21 @@ function sortUserDirectives(directives) {
 }
 var Context = class {
   constructor(options) {
-    this.env = process.env;
+    this.env = _process2.default.env;
     this.options = resolveOptions(options);
     this.directives = sortUserDirectives(this.options.directives.map((d) => typeof d === "function" ? d(this) : d)).flat();
     this.lexers = this.directives.map((d) => d.lex);
     this.parsers = this.directives.map((d) => d.parse);
     this.transforms = this.directives.map((d) => d.transform);
     this.generates = this.directives.map((d) => d.generate);
-    this.filter = createFilter(this.options.include, this.options.exclude);
-    this.logger = createLogger(void 0, {
+    this.filter = _vite.createFilter.call(void 0, this.options.include, this.options.exclude);
+    this.logger = _vite.createLogger.call(void 0, void 0, {
       prefix: "unplugin-preprocessor-directives"
     });
     this.env = this.loadEnv();
   }
-  loadEnv(mode = process.env.NODE_ENV || "development") {
-    return loadEnv(
+  loadEnv(mode = _process2.default.env.NODE_ENV || "development") {
+    return _vite.loadEnv.call(void 0, 
       mode,
       this.options.cwd,
       ""
@@ -334,15 +334,11 @@ var Context = class {
     const tokens = Lexer.lex(code, this.lexers);
     const ast = Parser.parse(tokens, this.parsers);
     const transformed = Transformer.transform(ast, this.transforms);
-    const ms = new MagicString(code, { filename: _id });
+    const ms = new (0, _magicstring2.default)(code, { filename: _id });
     const generateSourcemap = () => {
       return {
-        code: `${ms.toString()}
-//# sourceMappingURL=${_id}.map`,
+        code: ms.toString(),
         map: ms.generateMap({
-          source: _id,
-          file: _id,
-          includeContent: true,
           hires: true
         })
       };
@@ -365,8 +361,8 @@ function defineDirective(directive) {
 }
 
 // src/core/directives/if.ts
-import process2 from "process";
-function resolveConditional(test, env = process2.env) {
+
+function resolveConditional(test, env = _process2.default.env) {
   test = test || "true";
   test = test.trim();
   test = test.replace(/([^=!])=([^=])/g, "$1==$2");
@@ -466,8 +462,8 @@ ${comment.start} #endif ${comment.end}`;
 });
 
 // src/core/directives/define.ts
-import process3 from "process";
-function resolveDefineNameAndValue(expression, env = process3.env) {
+
+function resolveDefineNameAndValue(expression, env = _process2.default.env) {
   if (/^\w*$/.test(expression)) {
     return [expression, true];
   } else {
@@ -565,8 +561,8 @@ var MessageDirective = defineDirective((context) => ({
 }));
 
 // src/core/unplugin.ts
-import { createUnplugin } from "unplugin";
-import remapping from "@ampproject/remapping";
+var _unplugin = require('unplugin');
+var _remapping = require('@ampproject/remapping'); var _remapping2 = _interopRequireDefault(_remapping);
 var unpluginFactory = (options) => {
   var _a;
   const ctx = new Context(__spreadProps(__spreadValues({}, options), { directives: [ifDirective, theDefineDirective, MessageDirective, ...(_a = options == null ? void 0 : options.directives) != null ? _a : []] }));
@@ -585,7 +581,7 @@ var unpluginFactory = (options) => {
         if (ctx.filter(id)) {
           const transformed = ctx.transformWithMap(code, id);
           if (transformed) {
-            const map = remapping(
+            const map = _remapping2.default.call(void 0, 
               [this.getCombinedSourcemap(), transformed.map],
               () => null
             );
@@ -599,25 +595,25 @@ var unpluginFactory = (options) => {
     }
   };
 };
-var unplugin = /* @__PURE__ */ createUnplugin(unpluginFactory);
+var unplugin = /* @__PURE__ */ _unplugin.createUnplugin.call(void 0, unpluginFactory);
 
-export {
-  comments,
-  simpleMatchToken,
-  createProgramNode,
-  isComment,
-  parseComment,
-  findComment,
-  Lexer,
-  Parser,
-  resolveOptions,
-  sortUserDirectives,
-  Context,
-  defineDirective,
-  resolveConditional,
-  ifDirective,
-  theDefineDirective,
-  MessageDirective,
-  unpluginFactory,
-  unplugin
-};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+exports.comments = comments; exports.simpleMatchToken = simpleMatchToken; exports.createProgramNode = createProgramNode; exports.isComment = isComment; exports.parseComment = parseComment; exports.findComment = findComment; exports.Lexer = Lexer; exports.Parser = Parser; exports.resolveOptions = resolveOptions; exports.sortUserDirectives = sortUserDirectives; exports.Context = Context; exports.defineDirective = defineDirective; exports.resolveConditional = resolveConditional; exports.ifDirective = ifDirective; exports.theDefineDirective = theDefineDirective; exports.MessageDirective = MessageDirective; exports.unpluginFactory = unpluginFactory; exports.unplugin = unplugin;
