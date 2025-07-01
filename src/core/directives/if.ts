@@ -1,6 +1,6 @@
 import process from 'node:process'
 import { defineDirective } from '../directive'
-import type { IfStatement, IfToken } from '../types'
+import type { IfStatement, IfToken, SimpleNode } from '../types'
 import { simpleMatchToken } from '../utils'
 
 export function resolveConditional(test: string, env = process.env) {
@@ -28,6 +28,13 @@ export function resolveConditional(test: string, env = process.env) {
   }
 }
 
+// function getRangeFromTokens(tokens: SimpleNode[]) {
+//   return {
+//     start: Math.min(...tokens.map(t => t.start || Number.POSITIVE_INFINITY)),
+//     end: Math.max(...tokens.map(t => t.end || Number.NEGATIVE_INFINITY)),
+//   }
+// }
+
 export const ifDirective = defineDirective<IfToken, IfStatement>((context) => {
   return {
     lex(comment) {
@@ -41,6 +48,8 @@ export const ifDirective = defineDirective<IfToken, IfStatement>((context) => {
           consequent: [],
           alternate: [],
           kind: token.type,
+          start: token.start,
+          end: token.end,
         }
         this.current++
 
@@ -49,16 +58,20 @@ export const ifDirective = defineDirective<IfToken, IfStatement>((context) => {
 
           if (nextToken.type === 'elif' || nextToken.type === 'else') {
             node.alternate.push(this.walk())
+            node.end = Math.max(node.end || Number.NEGATIVE_INFINITY, ...node.alternate.map(n => n.end || Number.NEGATIVE_INFINITY))
             break
           }
           else if (nextToken.type === 'endif') {
             this.current++ // Skip 'endif'
+            node.end = nextToken.end
             break
           }
           else {
             node.consequent.push(this.walk())
+            node.end = Math.max(node.end || Number.NEGATIVE_INFINITY, ...node.consequent.map(n => n.end || Number.NEGATIVE_INFINITY))
           }
         }
+
         return node
       }
     },
@@ -68,12 +81,20 @@ export const ifDirective = defineDirective<IfToken, IfStatement>((context) => {
           return {
             type: 'Program',
             body: node.consequent.map(this.walk.bind(this)).filter(n => n != null),
+            // range: getRangeFromTokens(node.consequent),
+            start: node.start,
+            end: node.end, // Math.max(...node.consequent.map(n => n.end)) || node.end,
+            replace: true,
           }
         }
         else if (node.alternate) {
           return {
             type: 'Program',
             body: node.alternate.map(this.walk.bind(this)).filter(n => n != null),
+            // range: getRangeFromTokens(node.alternate),
+            start: node.start, // Math.min(...node.alternate.map(n => n.start)) || node.start,
+            end: node.end,
+            replace: true,
           }
         }
       }

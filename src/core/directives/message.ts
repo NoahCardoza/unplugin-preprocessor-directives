@@ -13,6 +13,8 @@ export const MessageDirective = defineDirective<MessageToken, MessageStatement>(
         type: 'MessageStatement',
         kind: token.type,
         value: token.value,
+        start: token.start,
+        end: token.end,
       }
     }
   },

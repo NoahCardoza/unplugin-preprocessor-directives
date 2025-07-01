@@ -4,7 +4,7 @@ import { createFilter, createLogger, loadEnv } from 'vite'
 import MagicString from 'magic-string'
 import type { UserOptions } from '../../types'
 import type { Generate, Lex, ObjectDirective, Parse, Transform } from '../types'
-import { Generator } from './generator'
+import { SimpleGenerator, SourcemapGenerator } from './generator'
 import { Lexer } from './lexer'
 import { Parser } from './parser'
 import { Transformer } from './transformer'
@@ -81,19 +81,47 @@ export class Context {
     const ast = Parser.parse(tokens, this.parsers)
 
     const transformed = Transformer.transform(ast, this.transforms)
+
     if (transformed)
-      return Generator.generate(transformed, this.generates)
+      return SimpleGenerator.generate(transformed, this.generates)
   }
 
   transformWithMap(code: string, _id: string) {
-    const generated = this.transform(code, _id)
-    if (generated) {
-      const ms = new MagicString(code, { filename: _id })
-      ms.overwrite(0, code.length, generated)
+    const tokens = Lexer.lex(code, this.lexers)
+    const ast = Parser.parse(tokens, this.parsers)
+    const transformed = Transformer.transform(ast, this.transforms)
+
+    const ms = new MagicString(code, { filename: _id })
+
+    const generateSourcemap = () => {
       return {
-        code: ms.toString(),
-        map: ms.generateMap({ hires: true }),
+        code: `${ms.toString()}\n//# sourceMappingURL=${_id}.map`,
+        map: ms.generateMap({
+          source: _id,
+          file: _id,
+          includeContent: true,
+          hires: true,
+        }),
       }
     }
+
+    if (!transformed) {
+      this.logger.warn(`No transformations applied to ${_id}.`)
+      return generateSourcemap()
+    }
+
+    const generated = SourcemapGenerator.generate(transformed, this.generates)
+
+    if (!generated?.length) {
+      this.logger.warn(`No code generated for ${_id}.`)
+      return generateSourcemap()
+    }
+
+    // Apply the generated code to the MagicString instance
+    generated.forEach((edit) => {
+      ms.overwrite(edit.start, edit.end, edit.value)
+    })
+
+    return generateSourcemap()
   }
 }

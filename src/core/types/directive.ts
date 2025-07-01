@@ -5,16 +5,29 @@ import type { Transformer } from '../context/transformer'
 import type { Generator } from '../context/generator'
 import type { Comment } from '../types'
 
+/**
+ * TODO: this interface needs to be split so the
+ * so directives don't need to be required to provide
+ * start and end properties
+ */
 export interface SimpleToken {
   comment?: string
   type: string
   value: string
+  start?: number
+  end?: number
   [x: string]: any
 }
 
+/**
+ * TODO: the issue above also related to this interface
+ * since the start and end are often copied over directly
+ */
 export interface SimpleNode {
   comment?: string
   type: string
+  start?: number
+  end?: number
   [x: string]: any
 }
 

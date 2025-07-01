@@ -1,19 +1,22 @@
 import { readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { describe, expect, it } from 'vitest'
-import { Generator } from '../src/core/context/generator'
-import { Context, Lexer, Parser } from '../src'
+import { SimpleGenerator } from '../src/core/context/generator'
+import { Context, Lexer, Parser, type SimpleNode } from '../src'
 
 describe('generator', () => {
   it('should generate code for Program node', () => {
     const node = {
       type: 'Program',
       body: [
-        { type: 'CodeStatement', value: 'console.log("Hello, World!");' },
-        { type: 'CodeStatement', value: 'console.log("Hello, KeJun");' },
+        { type: 'CodeStatement', value: 'console.log("Hello, World!");', start: 0, end: 30 },
+        { type: 'CodeStatement', value: 'console.log("Hello, KeJun");', start: 30, end: 59 },
       ],
-    }
-    const result = Generator.generate(node)
+      start: 0,
+      end: 59,
+    } satisfies SimpleNode
+
+    const result = SimpleGenerator.generate(node)
     expect(result).toBe('console.log("Hello, World!");\nconsole.log("Hello, KeJun");')
   })
 
@@ -21,8 +24,10 @@ describe('generator', () => {
     const node = {
       type: 'CodeStatement',
       value: 'console.log("Hello, World!");',
+      start: 0,
+      end: 30,
     }
-    const result = Generator.generate(node)
+    const result = SimpleGenerator.generate(node)
     expect(result).toBe('console.log("Hello, World!");')
   })
 
@@ -31,7 +36,7 @@ describe('generator', () => {
     const code = readFileSync(resolve(__dirname, './fixtures/if.html'), 'utf-8')
     const tokens = Lexer.lex(code, ctx.lexers)
     const ast = Parser.parse(tokens, ctx.parsers)
-    const generated = Generator.generate(ast, ctx.generates)
+    const generated = SimpleGenerator.generate(ast, ctx.generates)
     expect(generated.replaceAll(/\s/g, '')).toBe(code.replaceAll(/\s/g, ''))
   })
 
@@ -39,7 +44,9 @@ describe('generator', () => {
     const node = {
       type: 'UnknownNode',
       value: 'console.log("Hello, World!");',
+      start: 0,
+      end: 30,
     }
-    expect(() => Generator.generate(node)).toThrowError('Generator: Unknown node type: UnknownNode')
+    expect(() => SimpleGenerator.generate(node)).toThrowError('Generator: Unknown node type: UnknownNode')
   })
 })

@@ -9,10 +9,10 @@ describe('lexer', () => {
       // Another comment
       const baz = 'qux';`
     const expectedTokens = [
-      { type: 'code', value: '// This is a comment' },
-      { type: 'code', value: 'const foo = \'bar\';' },
-      { type: 'code', value: '// Another comment' },
-      { type: 'code', value: 'const baz = \'qux\';' },
+      { type: 'code', value: '// This is a comment', start: 0, end: 28 },
+      { type: 'code', value: 'const foo = \'bar\';', start: 28, end: 53 },
+      { type: 'code', value: '// Another comment', start: 53, end: 78 },
+      { type: 'code', value: 'const baz = \'qux\';', start: 78, end: 102 },
     ]
 
     const tokens = Lexer.lex(code)
@@ -25,8 +25,8 @@ describe('lexer', () => {
       const foo = 'bar';
       const baz = 'qux';`
     const expectedTokens = [
-      { type: 'code', value: 'const foo = \'bar\';' },
-      { type: 'code', value: 'const baz = \'qux\';' },
+      { type: 'code', value: 'const foo = \'bar\';', start: 0, end: 26 },
+      { type: 'code', value: 'const baz = \'qux\';', start: 26, end: 50 },
     ]
 
     const tokens = Lexer.lex(code)

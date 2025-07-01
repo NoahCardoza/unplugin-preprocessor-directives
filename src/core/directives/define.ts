@@ -41,6 +41,8 @@ export const theDefineDirective = defineDirective<DefineToken, DefineStatement>(
         type: 'DefineStatement',
         kind: token.type,
         value: token.value,
+        start: token.start,
+        end: token.end,
       }
     }
   },

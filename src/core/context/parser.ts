@@ -12,7 +12,7 @@ export class Parser {
 
     if (token.type === 'code') {
       this.current++
-      return { type: 'CodeStatement', value: token.value } as CodeStatement
+      return { type: 'CodeStatement', value: token.value, start: token.start, end: token.end } as CodeStatement
     }
 
     for (const parser of this.parsers) {
