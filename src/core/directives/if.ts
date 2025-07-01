@@ -28,13 +28,6 @@ export function resolveConditional(test: string, env = process.env) {
   }
 }
 
-// function getRangeFromTokens(tokens: SimpleNode[]) {
-//   return {
-//     start: Math.min(...tokens.map(t => t.start || Number.POSITIVE_INFINITY)),
-//     end: Math.max(...tokens.map(t => t.end || Number.NEGATIVE_INFINITY)),
-//   }
-// }
-
 export const ifDirective = defineDirective<IfToken, IfStatement>((context) => {
   return {
     lex(comment) {
@@ -81,9 +74,8 @@ export const ifDirective = defineDirective<IfToken, IfStatement>((context) => {
           return {
             type: 'Program',
             body: node.consequent.map(this.walk.bind(this)).filter(n => n != null),
-            // range: getRangeFromTokens(node.consequent),
             start: node.start,
-            end: node.end, // Math.max(...node.consequent.map(n => n.end)) || node.end,
+            end: node.end,
             replace: true,
           }
         }
@@ -91,8 +83,7 @@ export const ifDirective = defineDirective<IfToken, IfStatement>((context) => {
           return {
             type: 'Program',
             body: node.alternate.map(this.walk.bind(this)).filter(n => n != null),
-            // range: getRangeFromTokens(node.alternate),
-            start: node.start, // Math.min(...node.alternate.map(n => n.start)) || node.start,
+            start: node.start,
             end: node.end,
             replace: true,
           }

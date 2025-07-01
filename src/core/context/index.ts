@@ -105,17 +105,13 @@ export class Context {
       }
     }
 
-    if (!transformed) {
-      this.logger.warn(`No transformations applied to ${_id}.`)
+    if (!transformed)
       return generateSourcemap()
-    }
 
     const generated = SourcemapGenerator.generate(transformed, this.generates)
 
-    if (!generated?.length) {
-      this.logger.warn(`No code generated for ${_id}.`)
+    if (!generated?.length)
       return generateSourcemap()
-    }
 
     // Apply the generated code to the MagicString instance
     generated.forEach((edit) => {
