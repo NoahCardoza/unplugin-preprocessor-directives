@@ -2,6 +2,10 @@ import { resolve } from 'node:path'
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
 import fg from 'fast-glob'
+import type { SourceMapInput } from '@ampproject/remapping'
+import remapping from '@ampproject/remapping'
+import type { SourceMap } from 'magic-string'
+import MagicString from 'magic-string'
 import { Context, ifDirective } from '../src'
 
 // if true, writes test files and their generated sourcemaps
@@ -17,7 +21,7 @@ describe('sourcemap', () => {
     directives: [ifDirective],
   })
 
-  const saveSourcemapsForDebug = (file: string, result: { code: string, map: any }, key: string) => {
+  const saveSourcemapsForDebug = (inputCode: string, id: string, result: { code: string, map: SourceMap }, key: string) => {
     if (debugSourcemaps) {
       const testOutputDir = resolve(sourcemapDebugRoot, key)
       const { code: outputCode, map } = result
@@ -25,12 +29,26 @@ describe('sourcemap', () => {
       if (!existsSync(testOutputDir))
         mkdirSync(testOutputDir, { recursive: true })
 
-      const outputFile = resolve(testOutputDir, file)
-      const mapFile = `${outputFile}.map`
+      const mapId = `${id}.map`
+      const inputFile = resolve(root, id)
+      const outputFile = resolve(testOutputDir, id)
+      const mapFile = resolve(testOutputDir, mapId)
+
+      // remap the sourcemap to the original file
+      const ms = new MagicString(inputCode, { filename: inputFile })
+      const originalMap = ms.generateMap({
+        source: inputFile,
+        file: inputFile,
+        includeContent: true,
+        hires: true,
+      })
 
       // write the output code and sourcemap to files
-      writeFileSync(outputFile, outputCode)
-      writeFileSync(mapFile, JSON.stringify(map))
+      writeFileSync(outputFile, `${outputCode}\n//# sourceMappingURL=${mapId}`)
+      writeFileSync(mapFile, JSON.stringify({
+        ...originalMap,
+        mappings: map.mappings,
+      }, null, 2))
     }
   }
 
@@ -38,11 +56,12 @@ describe('sourcemap', () => {
     it(`should generate sourcemap ${file}, dev = true`, () => {
       context.env.DEV = true
       const code = readFileSync(resolve(root, file), 'utf-8')
+
       const result = context.transformWithMap(code, file)
 
       expect(result).toMatchSnapshot()
 
-      saveSourcemapsForDebug(file, result, 'dev-true')
+      saveSourcemapsForDebug(code, file, result, 'dev-true')
     })
   })
 
@@ -54,7 +73,7 @@ describe('sourcemap', () => {
 
       expect(result).toMatchSnapshot()
 
-      saveSourcemapsForDebug(file, result, 'dev-false')
+      saveSourcemapsForDebug(code, file, result, 'dev-false')
     })
   })
 })

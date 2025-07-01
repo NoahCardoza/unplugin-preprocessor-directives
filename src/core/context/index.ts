@@ -95,11 +95,8 @@ export class Context {
 
     const generateSourcemap = () => {
       return {
-        code: `${ms.toString()}\n//# sourceMappingURL=${_id}.map`,
+        code: ms.toString(),
         map: ms.generateMap({
-          source: _id,
-          file: _id,
-          includeContent: true,
           hires: true,
         }),
       }
